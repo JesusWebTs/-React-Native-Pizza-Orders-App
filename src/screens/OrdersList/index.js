@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import {
   View,
   Text,
@@ -8,12 +8,18 @@ import {
   TouchableOpacity,
   StatusBar,
 } from "react-native";
-import { ShopCartContext } from "../../context/ShopCartContext";
+import { OrdersContext } from "../../context/OrdersContext";
 import { SwipeListView } from "react-native-swipe-list-view";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-const Car = () => {
-  const { pizzaOrders, setPizzaOrders } = useContext(ShopCartContext);
+const OrderList = () => {
+  const { pizzaOrdersBought, setPizzaOrdersBought } = useContext(OrdersContext);
+
+  useEffect(() => {
+    console.log(pizzaOrdersBought);
+
+    return () => {};
+  }, [pizzaOrdersBought]);
 
   const VisibleItem = ({ data }) => {
     const { pizzaInfo, count, size, totalPrice, uuid, time } = data.item;
@@ -65,16 +71,17 @@ const Car = () => {
   };
 
   const closeRow = (rowMap, rowKey) => {
-    console.log(rowMap);
     if (rowMap[rowKey]) {
       rowMap[rowKey].close();
     }
   };
   const deleteRow = (rowMap, rowKey) => {
     closeRow(rowMap, rowKey);
-    let newData = pizzaOrders.map((el) => (el.uuid !== rowKey ? el : null));
+    let newData = pizzaOrdersBought.map((el) =>
+      el.uuid !== rowKey ? el : null
+    );
     newData = newData.filter((el) => el);
-    setPizzaOrders(newData);
+    setPizzaOrdersBought(newData);
   };
 
   const renderItem = (data, rowMap) => <VisibleItem data={data} />;
@@ -134,7 +141,7 @@ const Car = () => {
     >
       <View>
         <SwipeListView
-          data={pizzaOrders}
+          data={pizzaOrdersBought}
           renderItem={renderItem}
           renderHiddenItem={renderHiddenItem}
           leftOpenValue={75}
@@ -142,50 +149,10 @@ const Car = () => {
           disableRightSwipe
         />
       </View>
-      <View>
-        <TouchableHighlight
-          style={{
-            backgroundColor: "red",
-            height: 50,
-            borderTopLeftRadius: 10,
-            borderTopRightRadius: 10,
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-              paddingHorizontal: 20,
-            }}
-          >
-            <Text
-              style={{
-                fontWeight: "bold",
-                fontSize: 24,
-                color: "white",
-              }}
-            >
-              Comprar
-            </Text>
-            <Text style={{ fontWeight: "bold", fontSize: 20, color: "white" }}>
-              Total:{" "}
-              {pizzaOrders.reduce(
-                (acc, current) => acc + current.totalPrice,
-                0
-              )}{" "}
-              USD
-            </Text>
-          </View>
-        </TouchableHighlight>
-      </View>
     </View>
   );
 };
-export default Car;
+export default OrderList;
 
 const styles = StyleSheet.create({
   container: {

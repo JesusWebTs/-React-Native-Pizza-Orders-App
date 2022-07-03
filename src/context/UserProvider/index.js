@@ -3,7 +3,7 @@ import { createContext, useState } from "react";
 const UserContext = createContext(initialState);
 
 const initialState = {
-  pizzaOrders: [],
+  logged: false,
 };
 
 function UserProvider({ children }) {
@@ -11,10 +11,12 @@ function UserProvider({ children }) {
     UserReducer,
     initialState
   ); */
-  const [pizzaOrders, setPizzaOrders] = useState([]);
+  const [userInformation, setUserInformation] = useState({
+    logged: false,
+  });
 
   return (
-    <UserContext.Provider value={{ pizzaOrders, setPizzaOrders }}>
+    <UserContext.Provider value={{ userInformation, setUserInformation }}>
       {children}
     </UserContext.Provider>
   );

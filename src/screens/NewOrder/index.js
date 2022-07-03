@@ -71,21 +71,21 @@ const NewOrder = ({ navigation }) => {
       >
         <View style={styles.sizeSectionStyle}>
           <TouchableHighlight
-          underlayColor="#888"
+            underlayColor="#888"
             style={styles.buttonStyle}
             onPress={() => setSize("S")}
           >
             <Text style={styles.textButton}>S</Text>
           </TouchableHighlight>
           <TouchableHighlight
-          underlayColor="#888"
+            underlayColor="#888"
             style={styles.buttonStyle}
             onPress={() => setSize("M")}
           >
             <Text style={styles.textButton}>M</Text>
           </TouchableHighlight>
           <TouchableHighlight
-          underlayColor="#888"
+            underlayColor="#888"
             style={styles.buttonStyle}
             onPress={() => setSize("L")}
           >
@@ -95,7 +95,7 @@ const NewOrder = ({ navigation }) => {
         <View style={styles.addSectionStyle}>
           <View style={styles.addStyle}>
             <TouchableHighlight
-            underlayColor="#888"
+              underlayColor="#888"
               style={[styles.buttonStyle, styles.buttonStyleSmall]}
               onPress={() => setCount((prev) => prev - 1)}
             >
@@ -103,12 +103,18 @@ const NewOrder = ({ navigation }) => {
             </TouchableHighlight>
             <Text style={{ fontSize: 20 }}>{count}</Text>
             <TouchableHighlight
-            underlayColor="#888"
+              underlayColor="#888"
               style={[styles.buttonStyle, styles.buttonStyleSmall]}
               onPress={() => setCount((prev) => prev + 1)}
             >
               <Text style={[styles.textButton, styles.textButtonBig]}>+</Text>
             </TouchableHighlight>
+          </View>
+          <View>
+            <Text style={{
+              fontWeight: "bold",
+              fontSize: 18
+            }}>{size}</Text>
           </View>
           <View>
             <Text style={{ fontSize: 20 }}>
@@ -118,7 +124,7 @@ const NewOrder = ({ navigation }) => {
         </View>
         <View>
           <TouchableHighlight
-          underlayColor="#888"
+            underlayColor="#888"
             style={[styles.buttonStyle, styles.buttonStyleLarge]}
             onPress={makeOrder}
           >

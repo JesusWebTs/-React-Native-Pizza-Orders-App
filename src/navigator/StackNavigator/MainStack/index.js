@@ -11,7 +11,13 @@ export default function StackNavigator() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Login" component={Screen.Login} />
-        <Stack.Screen name="Loged" component={BottomTabNavigator} />
+        <Stack.Screen
+          name="Loged"
+          component={BottomTabNavigator}
+          options={{
+            headerShown: false,
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
